@@ -37,6 +37,8 @@ flowchart LR
 
 Do not confuse `VM` with `VCC`. Never feed the motor supply into the ESP32 3.3 V pin.
 
+For the N20 pair, verify each motor's stall current against one TB6612 channel. Gear ratio does not determine electrical safety, and two N20 motors that look identical can have different windings. If the published stall current is too high or unknown, measure it safely with a current-limited bench supply or choose a driver with comfortable margin.
+
 ## HC-SR04 level divider
 
 The sensor's Echo output is approximately 5 V, above the ESP32 GPIO limit. Wire:
@@ -57,4 +59,3 @@ This produces about 3.3 V at GPIO 34. Do not omit it. Trig accepts the ESP32's 3
 - Keep motor wires short or twisted and away from Echo/Trig wires.
 - Put a bulk capacitor (for example 470 µF) across `VM` and ground near the driver, observing polarity and voltage rating.
 - If the ESP32 resets when motors start, improve the 5 V regulator/wiring; do not paper over it in software.
-

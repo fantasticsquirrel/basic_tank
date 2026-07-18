@@ -20,9 +20,11 @@ constexpr uint8_t PWM_CHANNEL_RIGHT = 1;
 constexpr uint16_t PWM_FREQUENCY_HZ = 18000;
 constexpr uint8_t PWM_RESOLUTION_BITS = 8;
 
-constexpr int CRUISE_SPEED = 175;       // 0..255
-constexpr int REVERSE_SPEED = 150;
-constexpr int TURN_SPEED = 165;
+// Conservative starting values for an N20 drivetrain. Raise only after a
+// tread-off-the-ground test; actual speed depends heavily on gearbox ratio.
+constexpr int CRUISE_SPEED = 135;       // 0..255
+constexpr int REVERSE_SPEED = 125;
+constexpr int TURN_SPEED = 140;
 constexpr int RAMP_STEP = 8;
 constexpr uint16_t RAMP_INTERVAL_MS = 12;
 
@@ -42,4 +44,3 @@ constexpr uint16_t RECOVERY_TIME_MS = 180;
 constexpr bool INVERT_LEFT_MOTOR = false;
 constexpr bool INVERT_RIGHT_MOTOR = true;
 }  // namespace config
-
