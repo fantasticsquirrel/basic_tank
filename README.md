@@ -32,6 +32,10 @@ N20 describes the gearbox size, not one electrical specification. N20 motors are
 
 The complete physical build is in [BUILD.md](docs/BUILD.md). Behavior and calibration are in [TUNING.md](docs/TUNING.md).
 
+## Modular firmware
+
+This stays Arduino/C++, but it is not one giant sketch. Motor channels, tank drive, ultrasonic sensing, navigation, and application scheduling are separate modules. `main.cpp` only selects parts and connects them, so later hardware changes stay local. See [the architecture and extension guide](docs/ARCHITECTURE.md) for servo scanning, Bluetooth/Wi-Fi control, encoders, and additional sensors.
+
 ## Default behavior
 
 The rover takes five range samples and uses their median. It cruises while clear. At 25 cm it stops, reverses, pivots left or right (alternating each escape), then cautiously resumes. Four consecutive invalid sample groups cause a fail-safe stop; valid readings recover it.
@@ -59,7 +63,7 @@ pio test -e native
 pio run -e esp32dev
 ```
 
-The navigation state machine is hardware-independent and unit tested on the host. Hardware access stays in `src/main.cpp`.
+The navigation and drive-model logic are hardware-independent and unit tested on the host. GPIO access stays inside the motor and sensor drivers.
 
 ## License
 

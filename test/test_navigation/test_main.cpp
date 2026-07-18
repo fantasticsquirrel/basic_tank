@@ -1,4 +1,5 @@
 #include <unity.h>
+#include "drive_model.h"
 #include "navigation.h"
 
 static Navigator makeNavigator() { return Navigator({25, 34, 3, 100, 400, 500, 200}); }
@@ -35,12 +36,30 @@ void test_turn_direction_alternates() {
   TEST_ASSERT_EQUAL_INT((int)Motion::TurnRight, (int)nav.update(10, true, 1711).motion);
 }
 
+void test_motion_maps_to_independent_treads() {
+  const DriveSpeeds speeds{135, 125, 140};
+  WheelSpeeds wheels = speedsForMotion(Motion::TurnLeft, speeds);
+  TEST_ASSERT_EQUAL_INT(-140, wheels.left);
+  TEST_ASSERT_EQUAL_INT(140, wheels.right);
+  wheels = speedsForMotion(Motion::Reverse, speeds);
+  TEST_ASSERT_EQUAL_INT(-125, wheels.left);
+  TEST_ASSERT_EQUAL_INT(-125, wheels.right);
+}
+
+void test_ramp_never_overshoots() {
+  TEST_ASSERT_EQUAL_INT(8, rampToward(0, 100, 8));
+  TEST_ASSERT_EQUAL_INT(100, rampToward(98, 100, 8));
+  TEST_ASSERT_EQUAL_INT(-8, rampToward(0, -100, 8));
+  TEST_ASSERT_EQUAL_INT(-100, rampToward(-98, -100, 8));
+}
+
 int main(int, char**) {
   UNITY_BEGIN();
   RUN_TEST(test_cruises_when_clear);
   RUN_TEST(test_obstacle_runs_escape_sequence);
   RUN_TEST(test_invalid_sensor_fails_safe_and_recovers);
   RUN_TEST(test_turn_direction_alternates);
+  RUN_TEST(test_motion_maps_to_independent_treads);
+  RUN_TEST(test_ramp_never_overshoots);
   return UNITY_END();
 }
-
