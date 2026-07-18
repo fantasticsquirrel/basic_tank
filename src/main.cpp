@@ -5,6 +5,8 @@
 #include "robot_app.h"
 #include "tank_drive.h"
 #include "ultrasonic_sensor.h"
+#include "web_control.h"
+#include "wifi_secrets.h"
 
 Motor leftMotor({config::LEFT_IN1, config::LEFT_IN2, config::LEFT_PWM,
                  config::PWM_CHANNEL_LEFT, config::INVERT_LEFT_MOTOR});
@@ -22,7 +24,9 @@ Navigator navigator({config::STOP_DISTANCE_CM, config::CLEAR_DISTANCE_CM,
                      config::MAX_INVALID_READINGS, config::STOP_PAUSE_MS,
                      config::REVERSE_TIME_MS, config::TURN_TIME_MS,
                      config::RECOVERY_TIME_MS});
-RobotApp robot(drive, rangeSensor, navigator, config::SENSOR_INTERVAL_MS);
+WebControl webControl(secrets::WIFI_SSID, secrets::WIFI_PASSWORD,
+                      secrets::CONTROL_TOKEN, config::MANUAL_DEADMAN_MS);
+RobotApp robot(drive, rangeSensor, navigator, webControl, config::SENSOR_INTERVAL_MS);
 
 void setup() {
   Serial.begin(115200);
@@ -30,4 +34,3 @@ void setup() {
 }
 
 void loop() { robot.update(millis()); }
-

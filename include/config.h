@@ -39,6 +39,7 @@ constexpr uint16_t STOP_PAUSE_MS = 120;
 constexpr uint16_t REVERSE_TIME_MS = 420;
 constexpr uint16_t TURN_TIME_MS = 520;
 constexpr uint16_t RECOVERY_TIME_MS = 180;
+constexpr uint16_t MANUAL_DEADMAN_MS = 450;
 
 // Flip either one if that tread runs backward when FORWARD is requested.
 constexpr bool INVERT_LEFT_MOTOR = false;

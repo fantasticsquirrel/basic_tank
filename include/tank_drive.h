@@ -19,6 +19,7 @@ class TankDrive {
       : left_(left), right_(right), config_(config) {}
   void begin();
   void command(Motion motion);
+  void commandWheels(WheelSpeeds speeds);
   void update(uint32_t nowMs);
   void emergencyStop();
 
@@ -30,4 +31,3 @@ class TankDrive {
   WheelSpeeds target_{0, 0};
   uint32_t lastRampMs_ = 0;
 };
-

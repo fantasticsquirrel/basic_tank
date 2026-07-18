@@ -32,6 +32,10 @@ N20 describes the gearbox size, not one electrical specification. N20 motors are
 
 The complete physical build is in [BUILD.md](docs/BUILD.md). Behavior and calibration are in [TUNING.md](docs/TUNING.md).
 
+## Android control app
+
+The Expo app in `mobile/` connects straight to the ESP32 over local Wi-Fi—no cloud relay. It provides Auto/Manual selection, live telemetry, and independent forward/reverse controls for both treads. Manual control has a 450 ms firmware dead-man timeout. See [Wi-Fi control and Android setup](docs/WIFI_CONTROL.md).
+
 ## Modular firmware
 
 This stays Arduino/C++, but it is not one giant sketch. Motor channels, tank drive, ultrasonic sensing, navigation, and application scheduling are separate modules. `main.cpp` only selects parts and connects them, so later hardware changes stay local. See [the architecture and extension guide](docs/ARCHITECTURE.md) for servo scanning, Bluetooth/Wi-Fi control, encoders, and additional sensors.

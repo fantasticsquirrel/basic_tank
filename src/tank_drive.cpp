@@ -12,6 +12,10 @@ void TankDrive::command(Motion motion) {
   target_ = speedsForMotion(motion, config_.speeds);
 }
 
+void TankDrive::commandWheels(WheelSpeeds speeds) {
+  target_ = {constrain(speeds.left, -255, 255), constrain(speeds.right, -255, 255)};
+}
+
 void TankDrive::update(uint32_t nowMs) {
   if (nowMs - lastRampMs_ < config_.rampIntervalMs) return;
   lastRampMs_ = nowMs;
@@ -26,4 +30,3 @@ void TankDrive::emergencyStop() {
   left_.stop();
   right_.stop();
 }
-
