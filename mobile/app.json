@@ -18,11 +18,29 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "permissions": ["android.permission.INTERNET", "android.permission.ACCESS_WIFI_STATE"]
+      "permissions": [
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_WIFI_STATE"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [["expo-build-properties", {"android": {"usesCleartextTraffic": true}}]]
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "50b2268d-0c1e-407f-8c3e-b60694d5f91c"
+      }
+    },
+    "owner": "cabbageman2"
   }
 }
